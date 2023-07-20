@@ -1,0 +1,70 @@
+// 1. Render list of users using UserCard component
+// 2. Add handler to the "Add user" button that creates
+//   new user and add it the list of the users and clear the inputs
+// 3. Add handler to the "Filter users" button that filters out users
+//  older than 25 years
+// Don't use:
+// - if-else
+// - loops (for, while, until)
+
+const data = [
+  {
+    name: "John",
+    age: 20
+  },
+  {
+    name: "Bob",
+    age: 25
+  },
+  {
+    name: "Mike",
+    age: 30
+  }
+];
+
+// Use this component for rendering the users
+const UserCard = ({ name, age }) => (
+  <div>
+    <ul>
+      <li>{name}</li>
+      <li>{age}</li>
+    </ul>
+  </div>
+);
+
+export default function App() {
+  // Inner state - array of the users
+  const [users, setUsers] = useState(data);
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+
+  // On change handler for the inputs
+  const onChange = (setFunction, e) => setFunction(e.target.value);
+
+  return (
+    <div className="App">
+      {/* Render list of users here using UserCard */}
+      {users.map((name, age) => (
+        <UserCard name={name} age={age} />
+      ))}
+      <div>
+        <input
+          type="text"
+          placeholder="name"
+          onChange={onChange.bind(null, setName)}
+          value={name}
+        />
+        <input
+          type="text"
+          placeholder="age"
+          onChange={onChange.bind(null, setAge)}
+          value={age}
+        />
+        {/* Add handler to the Add user button */}
+        <button>Add user</button>
+        {/* Add handler to the Filter users button */}
+        <button>Filter users</button>
+      </div>
+    </div>
+  );
+}
